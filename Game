@@ -1,0 +1,43 @@
+import random
+import tkinter as tk
+
+# Función de elección del usuario
+def election(user_choice):
+    computer = random.randint(1, 5)
+    if computer == user_choice:
+        resultado = "TIE!!!"
+    elif (user_choice == 1 and computer == 3) or (user_choice == 1 and computer == 4) or (user_choice == 3 and computer == 4):
+        resultado = "You win! Rocks crushed scissors (or lizard)"
+    elif (user_choice == 2 and computer == 1) or (user_choice == 5 and computer == 1) or (user_choice == 2 and computer == 5):
+        resultado = "You win! Paper covers rock (or Spock)"
+    else:
+        resultado = "Computer wins!"
+    return computer, resultado
+
+# Crear una ventana
+ventana = tk.Tk()
+ventana.title("Rock Paper Scissors Lizard Spock.")
+
+# Función que se ejecutará cuando se haga clic en un botón
+def opcion_seleccionada(opcion):
+    opcion_numerica = opciones.index(opcion) + 1
+    computer, resultado = election(opcion_numerica)
+    computer_choice_label.config(text=f"Computer chose: {opciones[computer - 1]}")
+    resultado_label.config(text=resultado)
+
+# Agregar botones para las opciones
+opciones = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
+for opcion in opciones:
+    boton = tk.Button(ventana, text=opcion, font=("Gabriola", 16), command=lambda o=opcion: opcion_seleccionada(o))
+    boton.pack()
+
+# Label para mostrar la elección de la computadora
+computer_choice_label = tk.Label(ventana, text="", font=("Gabriola", 16), bg="#A7F7C1")
+computer_choice_label.pack()
+
+# Label para mostrar el resultado
+resultado_label = tk.Label(ventana, text="", font=("Gabriola", 16), bg="#A7F7C1")
+resultado_label.pack()
+
+# Main loop
+ventana.mainloop()
